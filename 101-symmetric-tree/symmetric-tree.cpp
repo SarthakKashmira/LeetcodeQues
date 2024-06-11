@@ -11,18 +11,14 @@
  */
 class Solution {
 public:
-    void solve(TreeNode* p,TreeNode* q,bool &ans)
+    bool solve(TreeNode* p,TreeNode* q)
     {
-        if(p==NULL && q==NULL) return ;
-        if(p==NULL || q==NULL || p->val!=q->val) {ans=false;return;}
-        solve(p->left,q->right,ans);
-        solve(p->right,q->left,ans);
-        return ;
+        if(p==NULL && q==NULL) return true;
+        if(p==NULL || q==NULL || p->val!=q->val) {return false;}
+        return solve(p->left,q->right) && solve(p->right,q->left);
     }
     bool isSymmetric(TreeNode* root) {
         if(root==NULL) return true;
-        bool ans=true;
-        solve(root->left,root->right,ans);
-        return ans;
+        return solve(root->left,root->right);
     }
 };
