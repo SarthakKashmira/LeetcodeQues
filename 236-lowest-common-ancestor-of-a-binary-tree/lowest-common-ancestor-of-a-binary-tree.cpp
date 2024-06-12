@@ -32,7 +32,7 @@ public:
         TreeNode* temp=NULL;
         while(i<=(path1.size()-1) && j<=(path2.size()-1))
         {
-            if(path1[i]->val==path2[j]->val){temp=path1[i];}
+            if(path1[i]==path2[j]){temp=path1[i];}
             i++;j++;
         }
         return temp;
