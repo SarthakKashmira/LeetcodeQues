@@ -50,7 +50,7 @@ public:
             root->val=temp->val;
             temp->val=tempval;
             root->right=deleteNode(root->right,key);
-            return root;
+        
         }
 
      }
