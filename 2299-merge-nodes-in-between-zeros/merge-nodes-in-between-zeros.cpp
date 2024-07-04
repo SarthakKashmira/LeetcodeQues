@@ -25,10 +25,8 @@ public:
             else if(temp->val !=0)
             {
                 sum= sum + temp->val;
-                ListNode* tempo=temp;
                 temp=temp->next;
                 prev->next=temp;
-                delete(tempo);
             }
             else if(temp->val==0 && prev!=NULL)
             {
@@ -36,15 +34,11 @@ public:
                 sum=0;
                 prev=prev->next;
                 prev->next=temp;
-                ListNode* tempo=temp;
                 temp=temp->next;
                 prev->next=temp;
-                delete(tempo);
             }
         }
-        ListNode* tempo=head;
         head=head->next;
-        delete(tempo);
         return head;
     }
 };
