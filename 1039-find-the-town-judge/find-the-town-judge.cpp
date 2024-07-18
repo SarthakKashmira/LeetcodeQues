@@ -17,15 +17,15 @@ public:
         //     } 
         // }
         // return ans;
-        vector<vector<int>> v(n+1,vector<int>(2,0));
+        vector<int> v(n+1,0);
         for(auto i: trust)
         {
-            v[i[1]][0]++;
-            v[i[0]][1]++;
+            v[i[0]]--;
+            v[i[1]]++;
         }
         for(int i=1;i<n+1;i++)
         {
-            if(v[i][0]==n-1 && v[i][1]==0)
+            if(v[i]==n-1)
             {return i;}
         }
         return -1;
