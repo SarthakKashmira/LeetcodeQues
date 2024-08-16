@@ -9,32 +9,32 @@
  */
 class Solution {
 public:
-    bool path(TreeNode* root,TreeNode* target,vector<TreeNode*> &path1)
+    void solve(TreeNode* root, TreeNode* p, TreeNode* q,vector<vector<TreeNode*>> &paths,vector<TreeNode*> &path)
     {
-        if(root==NULL) return false;
-        path1.push_back(root);
-        if(root->val==target->val) {return true;}
-        bool left=path(root->left,target,path1);
-        bool right=path(root->right,target,path1);
-        if(left || right){return true;}
-        else{
-            path1.pop_back();
-            return false;
-        }
-        return true;
+        if(root==NULL)
+        {return ;}
+        path.push_back(root);
+        if(root==p)
+        {paths[0]=path;}
+        if(root==q)
+        {paths[1]=path;}
+        solve(root->left,p,q,paths,path);
+        solve(root->right,p,q,paths,path);
+        path.pop_back();
     }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        vector<TreeNode*> path1;
-        vector<TreeNode*> path2;
-        path(root,p,path1);
-        path(root,q,path2);
+        vector<vector<TreeNode*>> paths(2);
+        vector<TreeNode*> path;
+        solve(root,p,q,paths,path);
         int i=0;int j=0;
-        TreeNode* temp=NULL;
-        while(i<=(path1.size()-1) && j<=(path2.size()-1))
+        TreeNode* ans=NULL;
+        while(i<paths[0].size() && j<paths[1].size() && paths[0][i]==paths[1][j] )
         {
-            if(path1[i]==path2[j]){temp=path1[i];}
-            i++;j++;
+            ans=paths[0][i];
+            i++;
+            j++;
         }
-        return temp;
+        return ans;
+
     }
 };
