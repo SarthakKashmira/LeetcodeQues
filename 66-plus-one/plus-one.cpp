@@ -4,7 +4,6 @@ public:
         int n=digits.size()-1;
         int carry=0;
         int dig=digits[n]+1;
-        if(dig>9) carry=1;
         n--;
         while((n)>=0 && dig>9)
         {
