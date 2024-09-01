@@ -3,35 +3,44 @@ public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         int n=matrix.size();
         int m=matrix[0].size();
-        int sc=0;int ec=n-1;
-        int row=0;
-       
-        while(sc<=ec)
-         {
-            int mid=sc+(ec-sc)/2;
-    
-            if(matrix[mid][0]<=target && matrix[mid][m-1]>=target) {row=mid; break;}
-            else if(target>matrix[mid][m-1] )
+        if(n==1 && m==1)
+        {
+             if(matrix[0][0]==target) return true;
+             else return false;
+        }
+        int st=0;
+        int end=n-1;
+     
+        while(st<=end)
+          {
+            int mid=(st+end)/2;
+            if(matrix[mid][0]==target)
+            {return true;}
+            else if(matrix[mid][0]>target)
             {
-                sc=mid+1;
+                end=mid-1;
             }
             else{
-                ec=mid-1;
+                st=mid+1;
             }
           }
-        
-        int sr=0;int er=m-1;
-        while(sr<=er)
+        int row=end;
+        if(row<0) return false;
+        cout<<row;
+        st=0;
+        end=m-1;
+        while(st<=end)
         {
-            int mid=sr+(er-sr)/2;
-            if(matrix[row][mid]==target) return true;
+            int mid=(st+end)/2;
+            if(matrix[row][mid]==target)
+            {return true;}
             else if(matrix[row][mid]>target)
-            {er=mid-1;}
-            else{
-                sr=mid+1;
+            {
+                end=mid-1;
+            }else{
+                st=mid+1;
             }
         }
         return false;
-
     }
 };
