@@ -2,7 +2,7 @@ class Solution {
 public:
     int largestRectangleArea(vector<int>& heights) {
        int n = heights.size();
-    vector<int> nextgreat(n, n);  
+    vector<int> nextgreat(n, n);  // Initialize with n (right boundary)
     vector<int> prevgreat(n, -1); 
     stack<int> st;
 
