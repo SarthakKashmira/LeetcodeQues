@@ -25,17 +25,17 @@ public:
         if(root==NULL)
         {return ans;}
         TreeNode* curr=root;
-        while(!st.empty() || curr!=NULL)
+        while(!st.empty() || root!=NULL)
         {
-            while(curr!=NULL)
+            while(root!=NULL)
             {
-                st.push(curr);
-                curr=curr->left;
+                st.push(root);
+                root=root->left;
             }
-            curr=st.top();
+            root=st.top();
             st.pop();
-            ans.push_back(curr->val);
-            curr=curr->right;
+            ans.push_back(root->val);
+            root=root->right;
         }
         return ans;
     }
