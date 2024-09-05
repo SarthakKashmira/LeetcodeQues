@@ -11,35 +11,30 @@
  */
 class Solution {
 public:
-   TreeNode* solve(vector<int>& preorder, vector<int>& inorder, int sp, int ep, int si, int ei, unordered_map<int,int> &mp)
-{
-    if (si > ei || sp > ep) return NULL;
-    
-    // Get the current root value from the preorder list
-    int rootVal = preorder[sp];
-    // Create the root node
-    TreeNode* root = new TreeNode(rootVal);
-    
-    // Find the index of the root value in the inorder list
-    int ind = mp[rootVal];
-    
-    // Number of nodes in the left subtree
-    int numLeft = ind - si;
-    
-    // Recursively build the left and right subtrees
-    root->left = solve(preorder, inorder, sp + 1, sp + numLeft, si, ind - 1, mp);
-    root->right = solve(preorder, inorder, sp + numLeft + 1, ep, ind + 1, ei, mp);
-    
-    return root;
-}
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        int n=preorder.size();
-        unordered_map<int,int> mp;
-        TreeNode* temp=NULL;
-        for(int i=0;i<n;i++)
+    TreeNode* solve(vector<int>& preorder, vector<int>& inorder,int ps,int pe,int is,int ie)
+    {
+        if(ps>pe || is>ie)
+        { return NULL; }
+        if(ps==pe){ return new TreeNode(preorder[ps]); }
+        int ind=0;
+        for(int i=is;i<=ie;i++)
         {
-            mp.insert({inorder[i],i});
+            if(inorder[i]==preorder[ps])
+            {
+                ind=i;
+                break;
+            }
         }
-        return solve(preorder,inorder,0,n-1,0,n-1,mp);
+        TreeNode* temp=new TreeNode(preorder[ps]);
+        temp->left=solve(preorder,inorder,ps+1,ps+ind-is,is,ind-1);
+        temp->right=solve(preorder,inorder,ps+ind-is+1,pe,ind+1,ie);
+        return temp;
+    }
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        int ps=0;
+        int pe=preorder.size()-1;
+        int is=0;
+        int ie=inorder.size()-1;
+        return solve(preorder,inorder,ps,pe,is,ie);
     }
 };
