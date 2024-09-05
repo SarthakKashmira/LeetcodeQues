@@ -24,7 +24,7 @@ public:
             q.pop();
             if(tempo==NULL)
             {
-                ans.push_back(temp);
+                ans.insert(ans.begin(),temp);
                 temp.clear();
                 if(!q.empty())
                 {q.push(NULL);}
@@ -42,8 +42,6 @@ public:
 
             }
         }
-        reverse(ans.begin(),ans.end());
         return ans;
-
     }
 };
