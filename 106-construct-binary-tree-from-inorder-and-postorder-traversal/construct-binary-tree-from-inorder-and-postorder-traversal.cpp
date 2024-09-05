@@ -11,24 +11,32 @@
  */
 class Solution {
 public:
-    TreeNode* solve(vector<int>& inorder, vector<int>& postorder,unordered_map<int,int> &mp,int sp,int ep,int si,int ei,TreeNode* root)
+    TreeNode* solve(vector<int>& postorder,vector<int>& inorder,int ps,int pe,int is,int ie)
     {
-        if(sp>ep || si>ei) return NULL;
-        int val=postorder[ep];
-        root=new TreeNode(val);
-        int ind=mp[val];
-        int diff=ei-ind;
-        root->right=solve(inorder,postorder,mp,ep-diff,ep-1,ind+1,ei,root->right);
-        root->left=solve(inorder,postorder,mp,sp,ep-diff-1,si,ind-1,root->left);
-        return root;
-    }
-    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
-        unordered_map<int,int> mp;
-        TreeNode* temp=NULL;
-        for(int i=0;i<inorder.size();i++)
+        if(ps>pe || is>ie)
+        {return NULL;}
+        if(ps==pe)
+        {return new TreeNode(postorder[ps]);}
+
+        int ind=0;
+        for(int i=is;i<=ie;i++)
         {
-            mp.insert({inorder[i],i});
+            if(inorder[i]==postorder[pe])
+            {
+                ind=i;
+                break;
+            }
         }
-        return solve(inorder,postorder,mp,0,postorder.size()-1,0,inorder.size()-1,temp);
+        TreeNode* temp=new TreeNode(postorder[pe]);
+        temp->left=solve(postorder,inorder,ps,pe-ie+ind-1,is,ind-1);
+        temp->right=solve(postorder,inorder,pe-ie+ind,pe-1,ind+1,ie);
+        return temp;
+        }
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        int ps=0;
+        int pe=postorder.size()-1;
+        int is=0;
+        int ie=inorder.size()-1;
+        return solve(postorder,inorder,ps,pe,is,ie);
     }
 };
