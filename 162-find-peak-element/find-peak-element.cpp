@@ -10,21 +10,12 @@ public:
         {
             int mid=(l+e)/2;
             cout<<mid;
-            if(mid==0)
-            {
-                if(nums[l]>nums[e])
-                {
-                    return l;
-                }
-                else{
-                    return e;
-                }
-            }
-            else if((mid-1)>=0 && (mid+1)<nums.size() && nums[mid]>nums[mid-1] && nums[mid]>nums[mid+1])
+            
+           if((mid-1)>=0 && (mid+1)<nums.size() && nums[mid]>nums[mid-1] && nums[mid]>nums[mid+1])
             {
                 return mid;
             }
-            else if( (mid+1)<nums.size() &&  nums[mid]<nums[mid+1]){
+            else if( (mid+1)<nums.size() && nums[mid]<nums[mid+1]){
                 l=mid+1;
             }
             else{
