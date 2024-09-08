@@ -11,7 +11,7 @@ public:
             int mid=(l+e)/2;
             cout<<mid;
             
-           if((mid-1)>=0 && (mid+1)<nums.size() && nums[mid]>nums[mid-1] && nums[mid]>nums[mid+1])
+            if((mid-1)>=0 && (mid+1)<nums.size() && nums[mid]>nums[mid-1] && nums[mid]>nums[mid+1])
             {
                 return mid;
             }
