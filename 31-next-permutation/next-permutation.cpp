@@ -6,25 +6,25 @@ public:
         while(j>=1)
         {
             if(nums[j]>nums[j-1])
-            {break;}
+            {
+                break;
+            }
             j--;
         }
-        if(j==0){
+        if(j==0) {
             sort(nums.begin(),nums.end());
             return ;
         }
-        else{
-            for(int k=n-1;k>=j;k--)
+        j--;
+        for(int k=(n-1);k>j;k--)
+        {
+            if(nums[k]>nums[j])
             {
-                if(nums[k]>nums[j-1])
-                {
-                    swap(nums[k],nums[j-1]);
-                    break;
-                }
+                swap(nums[k],nums[j]);
+                break;
             }
-            cout<<nums[0];
-            sort(nums.begin()+j,nums.end());
         }
+        sort(nums.begin()+j+1,nums.end());
         return ;
     }
 };
