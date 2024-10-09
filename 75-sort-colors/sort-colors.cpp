@@ -7,17 +7,19 @@ public:
         int e=n-1;
         while(m<=e)
         {
-            if(nums[m]==2)
-            {swap(nums[m],nums[e]);
-             e--;}
-            else if(nums[m]==0)
+            if(nums[m]==0)
             {
-                swap(nums[m],nums[l]);
+                swap(nums[l],nums[m]);
                 l++;
                 m++;
             }
-            else{
+            else if(nums[m]==1)
+            {
                 m++;
+            }
+            else{
+                swap(nums[m],nums[e]);
+                e--;
             }
         }
         return ;
