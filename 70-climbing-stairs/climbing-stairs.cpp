@@ -9,7 +9,7 @@ int solve(int i,int n,vector<int> &dp)
     return dp[i]=(solve(i+1,n,dp)+solve(i+2,n,dp));
 }
     int climbStairs(int n) {
-        vector<int> dp(n,-1);
-       return solve(0,n,dp);
+        vector<int> dp(n+1,-1);
+        return solve(0,n,dp);
     }
 };
