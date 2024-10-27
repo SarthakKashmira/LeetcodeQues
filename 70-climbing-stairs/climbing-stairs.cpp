@@ -9,12 +9,15 @@ int solve(int i,int n,vector<int> &dp)
     return dp[i]=(solve(i+1,n,dp)+solve(i+2,n,dp));
 }
     int climbStairs(int n) {
-        vector<int> dp(n+1,-1);
-        dp[0]=dp[1]=1;
+        int var1=1;
+        int var2=1;
+        int ans=1;
         for(int i=2;i<=n;i++)
         {
-            dp[i]=dp[i-1]+dp[i-2];
+            ans=var1+var2;
+            var1=var2;
+            var2=ans;
         }
-        return dp[n];
+        return ans;
     }
 };
