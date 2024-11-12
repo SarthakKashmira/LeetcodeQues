@@ -1,23 +1,17 @@
 class Solution {
 public:
-    int countBitsInNumber(int n)
-    {
-        int count=0;
-        while(n>0)
-        {
-            if((n & 1)==1)
-            {
-                count++;
-            }
-            n=n>>1;
-        }
-        return count;
-    }
     vector<int> countBits(int n) {
         vector<int> ans(n+1);
-        for(int i=0;i<=n;i++)
+        ans[0]=0;
+        for(int i=1;i<=n;i++)
         {
-            ans[i]=countBitsInNumber(i);
+            if((i&1)==1)
+            {
+                ans[i]=ans[i-1]+1;
+            }
+            else{
+                ans[i]=ans[i/2];
+            }
         }
         return ans;
     }
